@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="date" class="userdata">
+    <button id="calculate">time left</button>
+    <div class="dayoutput">
+
+    </div>
+    <script>
+        // to get the data from user
+        let userData = document.querySelector(".userdata");
+
+        // for click function 
+      let   calculate = document.getElementById("calculate");
+
+      calculate.addEventListener("click",
+      function(){
+        console.log("userdata",userData.value);
+                // for current date
+                let currentDate = new Date();
+
+// for birthday date
+let userBirthday = new Date(userData.value);
+
+
+// to get the time
+let currentDateTime = currentDate.getTime(),
+    userBirthdayTime = userBirthday.getTime();
+
+
+    // to check the difference in miliseconds
+    let difference =  userBirthdayTime - currentDateTime ;
+    console.log(difference);
+
+    // for sec
+
+    let sec = difference/1000;
+
+    let min = sec / 60
+
+    let hour = min/60
+    let day = hour/24
+    console.log("day:",day);
+    document.querySelector(".dayoutput").innerHTML = Math.floor(day)+ " days are left in your birthday but it is posible that you would die before"
+      })
+       
+    </script>
+</body>
+</html>
