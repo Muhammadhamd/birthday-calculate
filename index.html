@@ -7,49 +7,46 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="date" class="userdata">
-    <button id="calculate">time left</button>
-    <div class="dayoutput">
-
+  
+  <div class="main-container">
+    <div class="input-container">
+      <input type="date" placeholder="your birthday date" class="userinput">
+      <button class="start">start countdown</button>
     </div>
-    <script>
-        // to get the data from user
-        let userData = document.querySelector(".userdata");
-
-        // for click function 
-      let   calculate = document.getElementById("calculate");
-
-      calculate.addEventListener("click",
-      function(){
-        console.log("userdata",userData.value);
-                // for current date
-                let currentDate = new Date();
-
-// for birthday date
-let userBirthday = new Date(userData.value);
+    <div class="output-container">
+      <div class="contdoun">
+        <div class="daysbox"></div>
+        <div class="hoursbox"></div>
+        <div class="minbox"></div>
+        <div class="secbox"></div>
+      </div>
+    </div>
+  </div>
 
 
-// to get the time
-let currentDateTime = currentDate.getTime(),
-    userBirthdayTime = userBirthday.getTime();
+<script>
+  let userInput = document.querySelector(".userinput");
 
+  let startBtn = document.querySelector(".start");
 
-    // to check the difference in miliseconds
-    let difference =  userBirthdayTime - currentDateTime ;
-    console.log(difference);
+    let x = setInterval(function() {
+      let userDate = new Date(userInput.value);
+  let userDateInSec = userDate.getTime();
+  let today = new Date().getTime();
+      let distance = userDateInSec - today;
+      let day =  Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hour =  Math.floor(((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))-5);
+      let min = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let sec = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // for sec
+console.log(distance)
 
-    let sec = difference/1000;
-
-    let min = sec / 60
-
-    let hour = min/60
-    let day = hour/24
-    console.log("day:",day);
-    document.querySelector(".dayoutput").innerHTML = Math.floor(day)+ " days are left in your birthday but it is posible that you would die before"
-      })
-       
+      document.querySelector(".daysbox").innerHTML = ("0" + day).slice(-3);
+      document.querySelector(".hoursbox").innerHTML = ("0" + hour).slice(-2);
+      document.querySelector(".minbox").innerHTML = ("0" + min).slice(-2);
+      document.querySelector(".secbox").innerHTML = ("0" + sec).slice(-2);
+    }, 1000);
+</script>
     </script>
 </body>
 </html>
